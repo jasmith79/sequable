@@ -56,7 +56,7 @@ export function* partition<T>(
  * @param pred The predicate to split the sequence by.
  * @param sequable The Iterable, Iterator, or generator function to partition.
  */
-export function partitionBy<P extends (x: unknown) => boolean>(
+export function partitionBy<P extends (x: any) => boolean>(
   pred: P,
   sequable: Sequable<Parameters<P>[0]>,
 ): [Iterable<Parameters<P>[0]>, Iterable<Parameters<P>[0]>] {
