@@ -8,7 +8,7 @@ import { Sequable, toIterator } from "./sequable";
  * @param sequable The Iterator, Iterable, or generator function sequence
  * to filter.
  */
-export function* filter<F extends (arg: unknown) => boolean>(
+export function* filter<F extends (arg: any) => boolean>(
   pred: F,
   seq: Sequable<Parameters<F>[0]>,
 ): Iterable<Parameters<F>[0]> {
