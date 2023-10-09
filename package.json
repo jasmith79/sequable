@@ -8,9 +8,13 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run-script build-cjs && npm run-script build-mjs",
+    "build-cjs": "tsc && npm run-script rename-cjs",
+    "build-mjs": "tsc --module esnext && npm run-script rename-mjs",
     "format": "prettier . --write",
     "lint": "eslint ./src",
+    "rename-cjs": "for f in ./dist/*.js; do mv -- \"$f\" \"${f%.js}.cjs\"; done",
+    "rename-mjs": "for f in ./dist/*.js; do mv -- \"$f\" \"${f%.js}.mjs\"; done",
     "test": "jest --silent=false"
   },
   "keywords": [
