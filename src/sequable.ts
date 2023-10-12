@@ -21,3 +21,23 @@ export function toIterator<T>(iter: Sequable<T>): Iterator<T> {
     return iter;
   }
 }
+
+/**
+ * Converts the given Iterator or generator function to an Iterable, given
+ * an Iterable just returns it.
+ *
+ * @param iter The Iterable, Iterator, or generator function to convert.
+ */
+export function toIterable<T>(iter: Sequable<T>): Iterable<T> {
+  if (isIterable(iter)) {
+    return iter;
+  } else if (typeof iter === "function") {
+    return {
+      [Symbol.iterator]: iter,
+    };
+  } else {
+    return {
+      [Symbol.iterator]: () => iter,
+    };
+  }
+}
