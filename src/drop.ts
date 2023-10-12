@@ -1,4 +1,4 @@
-import { Sequable, toIterator } from "./sequable";
+import { Sequable, toIterator } from "./sequable.js";
 
 /**
  * Drops the first n items of the given Iterator, Iterable, or generator

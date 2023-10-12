@@ -1,4 +1,4 @@
-import { Sequable, toIterator } from "./sequable";
+import { Sequable, toIterator } from "./sequable.js";
 
 /**
  * Maps the given function over the given Iterator, Iterable, or generator

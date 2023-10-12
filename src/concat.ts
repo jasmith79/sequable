@@ -1,4 +1,4 @@
-import { Sequable, toIterable } from "./sequable";
+import { Sequable, toIterable } from "./sequable.js";
 
 export function concat<T, U = T>(
   a: Sequable<T>,

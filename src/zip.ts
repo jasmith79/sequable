@@ -1,4 +1,4 @@
-import { Sequable, toIterator } from "./sequable";
+import { Sequable, toIterator } from "./sequable.js";
 
 /**
  * Yields tuples of the results of the two given Iterables, Iterators, or

@@ -1,4 +1,4 @@
-import { Sequable, toIterator } from "./sequable";
+import { Sequable, toIterator } from "./sequable.js";
 
 /**
  * Partitions the given Iterable, Iterator, or generator function into an
