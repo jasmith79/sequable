@@ -3,44 +3,44 @@
   "version": "0.0.1",
   "description": "Library functions for working with generators",
   "sideEffects": false,
-  "type": "module",
-  "main": "./cjs/index.cjs",
-  "module": "./esm/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/esm/index.mjs",
   "typings": "./esm/index.d.ts",
   "exports": {
     ".": {
-      "require": "./cjs/index.cjs",
-      "import": "./esm/index.js"
+      "require": "./dist/index.js",
+      "import": "./dist/esm/index.mjs"
     },
     "./take": {
-      "require": "./cjs/take.cjs",
-      "import": "./esm/take.js"
+      "require": "./dist/take.js",
+      "import": "./dist/esm/take.mjs"
     },
     "./partition": {
-      "require": "./cjs/partition.cjs",
-      "import": "./esm/partition.js"
+      "require": "./dist/partition.js",
+      "import": "./dist/esm/partition.mjs"
     },
     "./map": {
-      "require": "./cjs/map.cjs",
-      "import": "./esm/map.js"
+      "require": "./dist/map.js",
+      "import": "./dist/esm/map.mjs"
     },
     "./filter": {
-      "require": "./cjs/filter.cjs",
-      "import": "./esm/filter.js"
+      "require": "./dist/filter.js",
+      "import": "./dist/esm/filter.mjs"
     },
     "./sequable": {
-      "require": "./cjs/sequable.cjs",
-      "import": "./esm/sequable.js"
+      "require": "./dist/sequable.js",
+      "import": "./dist/esm/sequable.mjs"
     },
     "./zip": {
-      "require": "./cjs/zip.cjs",
-      "import": "./esm/zip.js"
+      "require": "./dist/zip.js",
+      "import": "./dist/esm/zip.mjs"
     }
   },
   "scripts": {
     "build": "npm run-script build-cjs && npm run-script build-esm/",
     "build-cjs": "tsc && npm run-script change-requires && npm run-script rename-cjs",
-    "build-esm/": "tsc --module esnext --outDir ./esm && fix-esm-import-path ./esm/index.js",
+    "build-esm": "tsc --module esnext --outDir ./esm && fix-esm-import-path ./dist/esm/index.mjs",
+    "build-duel": "duel",
     "rename-cjs": "./scripts/rename-cjs-files",
     "change-requires": "./scripts/rename-requires",
     "clean": "rm -rf ./esm && rm -rf ./cjs",
@@ -58,6 +58,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-typescript": "^7.23.0",
+    "@knighted/duel": "^1.0.0",
     "@types/jest": "^29.5.5",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
