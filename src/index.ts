@@ -1,4 +1,5 @@
 import { map } from "./map";
+import { concat } from "./concat";
 import { filter } from "./filter";
 import { partition, partitionBy } from "./partition";
 import { take, takeWhile } from "./take";
@@ -9,6 +10,7 @@ import type { Sequable } from "./sequable";
 export type { Sequable };
 
 export {
+  concat,
   map,
   drop,
   dropWhile,
