@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# Renames the files that are passed to require to use the .cjs file extension.
-# NOTE: this is NOT idempotent, running it twice will change it to .cjs.cjs.
-set -e
-
-pushd cjs || exit 1
-find . -name '*.js' -exec sed -E -i '' "s/require\([\"']([a-zA-Z0-9\.\/]+)[\"']\)/require('\1.cjs')/g" {} \;
-popd || exit 1

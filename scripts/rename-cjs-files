@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-# Renames all the files in the cjs directory from *.js to *.cjs
-set -e
-
-pushd cjs || exit 1
-for f in *.js; do mv -- "$f" "${f%.js}.cjs"; done
-popd || exit 1
