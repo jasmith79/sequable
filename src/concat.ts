@@ -1,5 +1,12 @@
 import { Sequable, toIterable } from "./sequable.js";
 
+/**
+ * Yields all of the items from sequence a then all of the items of sequence
+ * b.
+ *
+ * @param a The first sequence to combine.
+ * @param b The second sequence to combine.
+ */
 export function concat<T, U = T>(
   a: Sequable<T>,
   b: Sequable<U>,
