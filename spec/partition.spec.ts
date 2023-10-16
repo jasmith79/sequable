@@ -1,4 +1,5 @@
 import { partition, partitionBy } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("partition", () => {
   it("should split the iterator into n-sized chunks", () => {

@@ -1,4 +1,5 @@
 import { take, takeWhile } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("take", () => {
   it("should yield n items from a Iterable data type", () => {
@@ -10,7 +11,7 @@ describe("take", () => {
   });
 
   it("should work with infinite sequences", () => {
-    const inf = function* () {
+    const inf = function*() {
       let i = 0;
       while (true) {
         yield ++i; // all positive integers

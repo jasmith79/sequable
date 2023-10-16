@@ -1,4 +1,5 @@
 import { filter } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("filter", () => {
   it("should return the items from a sequence that match a predicate", () => {

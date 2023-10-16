@@ -1,8 +1,9 @@
+import { describe, it, expect } from "vitest";
 import { filter, map, take } from "../src";
 
 const square = (n: number): number => n * n;
 const isOdd = (n: number): boolean => n % 2 !== 0;
-const inf = function* () {
+const inf = function*() {
   let i = 0;
   while (true) {
     yield ++i; // all positive integers
@@ -18,8 +19,8 @@ const compose =
     f: F,
     g: G,
   ) =>
-  (x: Parameters<G>[0]) =>
-    f(g(x));
+    (x: Parameters<G>[0]) =>
+      f(g(x));
 
 describe("generator functions", () => {
   it("should compose the expected way", () => {

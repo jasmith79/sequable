@@ -1,4 +1,5 @@
 import { zip } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("zip", () => {
   it("should combine two sequences", () => {

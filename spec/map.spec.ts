@@ -1,4 +1,5 @@
 import { map } from "../src";
+import { describe, it, expect } from "vitest";
 
 const square = (n: number): number => n * n;
 

@@ -1,4 +1,5 @@
 import { toIterable, toIterator } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("toIterator", () => {
   it("should return an iterator from an iterable", () => {

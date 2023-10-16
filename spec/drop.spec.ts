@@ -1,4 +1,5 @@
 import { drop, dropWhile } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("drop", () => {
   it("should drop the first n items from the given iterable", () => {
