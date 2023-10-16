@@ -45,6 +45,7 @@
     "clean": "rm -rf ./dist",
     "format": "prettier . --write",
     "lint": "eslint ./src",
+    "prepublish": "npm run-script clean && npm run-script build && npm test && rm -rf node_modules",
     "test": "jest --silent=false"
   },
   "keywords": [
