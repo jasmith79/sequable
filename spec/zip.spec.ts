@@ -23,4 +23,27 @@ describe("zip", () => {
       ["c", 3],
     ]);
   });
+
+  it("supports the return value semantic of generator functions", () => {
+    const f = function* () {
+      let n = 3;
+      while (n--) {
+        yield n;
+      }
+
+      return 7;
+    };
+
+    const g = function* () {
+      let n = 4;
+      while (n--) {
+        yield n;
+      }
+    };
+
+    const iter = zip(f, g)[Symbol.iterator]();
+    let { done, value } = iter.next();
+    while (!done) ({ done, value } = iter.next());
+    expect(value).toEqual([7, 0]);
+  });
 });

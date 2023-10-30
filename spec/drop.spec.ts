@@ -7,6 +7,22 @@ describe("drop", () => {
     expect([...drop(1, [])]).toEqual([]);
     expect([...drop(1, [1])]).toEqual([]);
   });
+
+  it("supports the return value semantic of generator functions", () => {
+    const f = function* () {
+      let n = 3;
+      while (n--) {
+        yield n;
+      }
+
+      return 7;
+    };
+
+    const iter = drop(2, f)[Symbol.iterator]();
+    let { done, value } = iter.next();
+    while (!done) ({ done, value } = iter.next());
+    expect(value).toBe(7);
+  });
 });
 
 describe("dropWhile", () => {
@@ -16,5 +32,21 @@ describe("dropWhile", () => {
     );
     expect([...dropWhile((x) => Boolean(x % 2), [1, 3, 5])]).toEqual([]);
     expect([...dropWhile((x) => Boolean(x % 2), [])]).toEqual([]);
+  });
+
+  it("supports the return value semantic of generator functions", () => {
+    const f = function* () {
+      let n = 3;
+      while (n--) {
+        yield n;
+      }
+
+      return 7;
+    };
+
+    const iter = dropWhile((n: number) => n === 2, f)[Symbol.iterator]();
+    let { done, value } = iter.next();
+    while (!done) ({ done, value } = iter.next());
+    expect(value).toBe(7);
   });
 });

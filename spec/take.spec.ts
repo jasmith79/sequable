@@ -11,7 +11,7 @@ describe("take", () => {
   });
 
   it("should work with infinite sequences", () => {
-    const inf = function*() {
+    const inf = function* () {
       let i = 0;
       while (true) {
         yield ++i; // all positive integers
@@ -26,5 +26,25 @@ describe("takeWhile", () => {
   it("should return a sequence up until an item fails the predicate", () => {
     expect(Array.from(takeWhile(Boolean, [1, 2, 0]))).toEqual([1, 2]);
     expect(Array.from(takeWhile(Boolean, [1, 2]))).toEqual([1, 2]);
+  });
+
+  it("supports the return value semantic of generator functions", () => {
+    const f = function* () {
+      let n = 3;
+      while (n--) {
+        yield n;
+      }
+
+      return 7;
+    };
+
+    let value: number[] = [];
+    let done: boolean | undefined = false;
+    const parted = takeWhile((_n: number) => true, f);
+    const iter = parted[Symbol.iterator]();
+    while (!done) {
+      ({ value, done } = iter.next());
+    }
+    expect(value).toEqual(7);
   });
 });
