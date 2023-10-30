@@ -57,7 +57,51 @@ Unlike the `Array.prototype` versions of `map`, `filter`, etc. which materialize
 Iterators are inherently stateful. I've shown only pure function usage above for a _reason_. Just like you shouldn't mutate an array while iterating it with a `for` loop, you should be careful what side effects you introduce here too. Also walking through an iterator consumes it: don't hand the same iterator to multiple consumers:
 
 ```typescript
-const iter = getThreeOddSquares(allPositiveIntegers);
+const iter = getThreeOddSquares(allPositiveIntegers)[Symbol.iterator]();
 console.log(...iter); // logs 1, 9, 25
 const foo = Array.from(iter); // foo is empty because iter is already exhausted!
 ```
+
+Fortunately since the library returns iterables rather than raw iterators this can usually be avoided.
+
+## Note about returned values:
+
+It is possible when defining a generator function to return a value in addition to yielding values:
+
+```
+function* f() {
+  let n = 2;
+  while (n--) {
+    yield n;
+  }
+
+  return 7;
+}
+
+const iter = f();
+let result = {};
+while (result.done) {
+  result = iter.next();
+  console.log(result);
+}
+```
+
+will log out
+
+```
+{ done: false, value: 2 }
+{ done: false, value: 1 }
+{ done: false, value: 0 }
+{ done: true, value: 7 }
+```
+
+HOWEVER, these returned values are mostly ignored by constructs in the language that process iterators/iterables:
+
+```
+const arr = Array.from(f()); // [2, 1, 0], no 7
+for (const n of f()) {
+  console.log(n); // logs 2, 1. 0 but not 7
+}
+```
+
+With the exception of `concat` the functions in sequable largely pass these through with the expected semantics: `map` will return the value transformed by the function argument, `filter` will return the value if it passes the predicate, etc. But since `concat` combines sequables it's not clear to me at least at present what the semantics should be if one or both have return values so they are just dropped. See the unit tests for examples of how they are handled but if you never use the raw `.next()` method and instead use the usual constructs above you'll probably never even notice the return values.
