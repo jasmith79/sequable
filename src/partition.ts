@@ -19,14 +19,15 @@ export function* partition<T>(
   // the consumption of the iterable otherwise iterating through the returned
   // iterables could have surprising results.
   let srcDone = false;
+  let val = undefined;
   while (!srcDone) {
     let i = n;
     const values = [];
     while (i--) {
       const { value, done } = iter.next();
+      val = value;
       srcDone = Boolean(done);
       if (srcDone) {
-        if (value !== undefined) values.push(value);
         break;
       } else {
         values.push(value);
@@ -34,6 +35,10 @@ export function* partition<T>(
     }
 
     if (values.length) yield values;
+  }
+
+  if (val !== undefined) {
+    return val;
   }
 }
 
@@ -63,6 +68,8 @@ export function partitionBy<P extends (x: any) => boolean>(
   const iter = toIterator(sequable);
   const lastPassingValues: Parameters<P>[0][] = [];
   const lastFailingValues: Parameters<P>[0][] = [];
+  let passingRetVal: Parameters<P>[0] | undefined = undefined;
+  let failingRetVal: Parameters<P>[0] | undefined = undefined;
   let srcDone = false;
   return [
     {
@@ -78,11 +85,22 @@ export function partitionBy<P extends (x: any) => boolean>(
           }
           ({ value, done } = iter.next());
           srcDone = Boolean(done);
+          console.log(`value: ${value}, done: ${done}`);
+        }
+
+        if (value !== undefined) {
+          if (pred(value)) {
+            passingRetVal = value;
+          } else {
+            failingRetVal = value;
+          }
         }
 
         while (lastPassingValues.length) {
           yield lastPassingValues.shift();
         }
+
+        if (passingRetVal !== undefined) return passingRetVal;
       },
     },
     {
@@ -100,9 +118,19 @@ export function partitionBy<P extends (x: any) => boolean>(
           srcDone = Boolean(done);
         }
 
+        if (value !== undefined) {
+          if (pred(value)) {
+            passingRetVal = value;
+          } else {
+            failingRetVal = value;
+          }
+        }
+
         while (lastFailingValues.length) {
           yield lastFailingValues.shift();
         }
+
+        if (failingRetVal !== undefined) return failingRetVal;
       },
     },
   ];

@@ -20,5 +20,5 @@ export function* zip<T, U>(a: Sequable<T>, b: Sequable<U>): Iterable<[T, U]> {
     y = ys.next();
   }
 
-  if (x.value !== undefined && y.value !== undefined) return [x.value, y.value];
+  if (x.value !== undefined || y.value !== undefined) return [x.value, y.value];
 }
