@@ -68,7 +68,7 @@ Fortunately since the library returns iterables rather than raw iterators this c
 
 It is possible when defining a generator function to return a value in addition to yielding values:
 
-```
+```typescript
 function* f() {
   let n = 2;
   while (n--) {
@@ -88,7 +88,7 @@ while (result.done) {
 
 will log out
 
-```
+```typescript
 { done: false, value: 2 }
 { done: false, value: 1 }
 { done: false, value: 0 }
@@ -97,7 +97,7 @@ will log out
 
 HOWEVER, these returned values are mostly ignored by constructs in the language that process iterators/iterables:
 
-```
+```typescript
 const arr = Array.from(f()); // [2, 1, 0], no 7
 for (const n of f()) {
   console.log(n); // logs 2, 1. 0 but not 7
