@@ -47,7 +47,8 @@
     "format": "prettier . --write",
     "lint": "eslint ./src",
     "pre": "npm run-script clean && npm run-script build && npm test && rm -rf node_modules",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [
     "generators",
