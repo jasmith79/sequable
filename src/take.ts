@@ -25,10 +25,10 @@ export function* take<T>(n: number, sequable: Sequable<T>): Iterable<T> {
  * @param sequable The Iterator, Iterable, or generator function sequence
  * to yield from.
  */
-export function* takeWhile<P extends (x: any) => boolean>(
-  pred: P,
-  sequable: Sequable<Parameters<P>[0]>,
-): Iterable<Parameters<P>[0]> {
+export function* takeWhile<T>(
+  pred: (x: T) => boolean,
+  sequable: Sequable<T>,
+): Iterable<T> {
   const iter = toIterator(sequable);
   let { value, done } = iter.next();
   while (!done && pred(value)) {
