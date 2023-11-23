@@ -85,7 +85,6 @@ export function partitionBy<P extends (x: any) => boolean>(
           }
           ({ value, done } = iter.next());
           srcDone = Boolean(done);
-          console.log(`value: ${value}, done: ${done}`);
         }
 
         if (value !== undefined) {
