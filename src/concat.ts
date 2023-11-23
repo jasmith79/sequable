@@ -2,7 +2,8 @@ import { Sequable, toIterable } from "./sequable.js";
 
 /**
  * Yields all of the items from sequence a then all of the items of sequence
- * b.
+ * b. NOTE: return values of the sub-iterators are ignored: only yielded
+ * values are propagated similar to e.g. for..of loops.
  *
  * @param a The first sequence to combine.
  * @param b The second sequence to combine.

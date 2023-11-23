@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Library functions for working with generators",
   "sideEffects": false,
+  "private": false,
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -45,8 +46,9 @@
     "clean": "rm -rf ./dist",
     "format": "prettier . --write",
     "lint": "eslint ./src",
-    "prepublish": "npm run-script clean && npm run-script build && npm test && rm -rf node_modules",
-    "test": "vitest run"
+    "pre": "npm run-script clean && npm run-script build && npm test && rm -rf node_modules",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [
     "generators",
